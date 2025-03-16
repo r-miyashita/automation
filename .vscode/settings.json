@@ -1,0 +1,9 @@
+{
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.defaultFoldingRangeProvider": null,
+    "flake8.enabled": false,
+    "python.analysis.autoIndent": true,
+    "python.languageServer": "Pylance",
+    "ruff.format.preview": false,
+    "window.zoomLevel": -1
+}

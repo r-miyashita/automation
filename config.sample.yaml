@@ -1,0 +1,35 @@
+# 設定ファイルに読み込ませる環境を指定
+environment: "development"
+
+environments:
+  development:
+    aws:
+      access_key_id: "access_key_id"
+      secret_access_key: "secret_access_key"
+      region: "region"
+      bucket_name: "backet_name"
+
+    cloudfront:
+      domain: "xxxx.net"
+
+  production:
+    aws:
+      access_key_id: "access_key_id"
+      secret_access_key: "secret_access_key"
+      region: "region"
+      bucket_name: "bucket_name"
+
+    cloudfront:
+      domain: "xxx.net"
+
+files:
+  inputs:
+    delete_url_list: "./data/s3/delete_url_list.txt"
+    upload_file_list: "./data/s3/upload_file_list.txt"
+    resource: "./data/s3/files"
+
+  outputs:
+    delete_results: "./data/s3/logs/delete_results.txt"
+    upload_results: "./data/s3/logs/upload_results.txt"
+    error_logs: "./data/s3/logs/error.log"
+
