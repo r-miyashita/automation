@@ -1,3 +1,4 @@
+import os
 import logging
 import time
 import traceback
@@ -20,6 +21,11 @@ _ = set_path  # 動作確認用1
 
 # ログ設定 （ デフォルトは error.log ）
 def setup_logger(log_file: str = ERROR_LOG):
+    # ログファイルの格納先が存在しない場合、作成する
+    log_dir = os.path.dirname(log_file)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 

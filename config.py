@@ -1,12 +1,20 @@
 import yaml
 
 # 設定ファイルを読み込む
-CONFIG_FILE = "config.yaml"
+CONFIG_FILE = "config.yml"
 
 
 def load_config():
     with open(CONFIG_FILE, "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
+        config = yaml.safe_load(file)
+        environment = config.get("environment")
+        error_message = f"environment: {environment}: 設定が正しくありません。'environments'の中から環境を選択し 'environment' にセットしてください: {CONFIG_FILE}"
+
+        if not environment:
+            raise ValueError(error_message)
+        elif environment not in config["environments"]:
+            raise ValueError(error_message)
+        return config
 
 
 # 設定をロード
@@ -14,10 +22,6 @@ CONFIG = load_config()
 
 # 現在の環境設定を取得
 ENVIRONMENT = CONFIG["environment"]
-
-# 環境に応じた設定を取得
-if ENVIRONMENT not in CONFIG["environments"]:
-    raise ValueError(f"Invalid ENVIRONMENT value: {ENVIRONMENT}")
 
 ENV_CONFIG = CONFIG["environments"][ENVIRONMENT]
 

@@ -13,4 +13,4 @@ venv/
 .DS_Store
 
 # 設定ファイル
-config.yaml
+config.yml
