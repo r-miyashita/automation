@@ -6,9 +6,9 @@ services:
     container_name: automation-app
     working_dir: /app  # コンテナ内の作業ディレクトリを /app に設定
     volumes:
-      - ..:/app  # 現在のディレクトリをコンテナの /app にマウント
+      - ..:/app  # .devcontainerの1つ上(root dir)を /app にマウント
     environment:
       - PYTHONUNBUFFERED=1  # ログ出力を即時に反映させる
       - PYTHONPATH=/app  # Python が /app を認識できるようにする
-    stdin_open: true  # インタラクティブなターミナルを有効にする
-    tty: true  # ターミナルを維持する
+    stdin_open: true
+    tty: true 
