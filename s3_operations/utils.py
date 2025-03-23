@@ -5,7 +5,6 @@ import traceback
 from urllib import request
 
 import boto3
-import set_path  # 動作確認用1
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 
 from config import (
@@ -15,8 +14,6 @@ from config import (
     DELETE_RESULT,
     ERROR_LOG,
 )
-
-_ = set_path  # 動作確認用1
 
 
 # ログ設定 （ デフォルトは error.log ）

@@ -40,6 +40,7 @@ DELETE_RESULT = CONFIG["files"]["outputs"]["delete_results"]
 
 UPLOAD_FILE_LIST = CONFIG["files"]["inputs"]["upload_file_list"]
 RESOURCE = CONFIG["files"]["inputs"]["resource"]
+UPLOAD_RESULT = CONFIG["files"]["outputs"]["upload_results"]
 
 # 確認用
 print(f"Using {ENVIRONMENT} environment")

@@ -1,5 +1,5 @@
 成功 ####
-https://boto3-test-0000.s3.ap-northeast-1.amazonaws.com/test/dir1/polars.png
-https://boto3-test-0000.s3.ap-northeast-1.amazonaws.com/test/dir1/tailwind.png
 
 失敗 ####
+[test/dir1/polars.png] URL not accessible : https://boto3-test-0000.s3.ap-northeast-1.amazonaws.com/test/dir1/polars.png
+[test/dir1/tailwind.png] URL not accessible : https://boto3-test-0000.s3.ap-northeast-1.amazonaws.com/test/dir1/tailwind.png

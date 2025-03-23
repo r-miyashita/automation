@@ -2,7 +2,6 @@ import mimetypes
 import os
 from urllib import parse
 
-import set_path
 from botocore.exceptions import ClientError
 from utils import (
     check_url_accessible,
@@ -14,9 +13,7 @@ from utils import (
     write_results_to_file,
 )
 
-from config import BUCKET_NAME, CLOUD_FRONT_DOMAIN, RESOURCE, UPLOAD_FILE_LIST
-
-_ = set_path
+from config import BUCKET_NAME, CLOUD_FRONT_DOMAIN, RESOURCE, UPLOAD_FILE_LIST, UPLOAD_RESULT
 
 # エラーログ用にセットアップ関数呼び出し
 setup_logger()
@@ -67,6 +64,7 @@ def main():
                         {
                             "file_name": file_name,
                             "reason": "アップロード対象のファイルが見つかりません",
+                            "url": f"{files_dir}/{file_name}"
                         }
                     )
                     continue
@@ -122,7 +120,7 @@ def main():
                         }
                     )
         # ファイル出力
-        write_results_to_file(success_list, failure_list)
+        write_results_to_file(success_list, failure_list, UPLOAD_RESULT)
 
     except Exception as e:
         if isinstance(e, FileNotFoundError):

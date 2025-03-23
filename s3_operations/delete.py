@@ -1,7 +1,6 @@
 import re
 from urllib import parse
 
-import set_path
 from botocore.exceptions import ClientError
 from utils import (
     check_url_accessible,
@@ -13,10 +12,7 @@ from utils import (
     write_results_to_file,
 )
 
-from config import AWS_REGION, BUCKET_NAME, DELETE_URL_LIST
-
-# Linter対策のためにダミー変数へ格納。import段階で用済みなので以降は無視してよい
-_ = set_path
+from config import AWS_REGION, BUCKET_NAME, DELETE_URL_LIST, DELETE_RESULT
 
 # エラーログ用にセットアップ関数呼び出し
 setup_logger()
@@ -86,7 +82,7 @@ def main():
                             )
 
                         success_list.append(s3_url)
-                    # todo: ログ書き込みにする。client_errorは削除。その他エラーを
+
                     except Exception as e:
                         reason = str(e)
 
@@ -113,7 +109,7 @@ def main():
             return
 
     # 処理結果ログ を出力
-    write_results_to_file(success_list, failure_list)
+    write_results_to_file(success_list, failure_list, DELETE_RESULT)
 
 
 if __name__ == "__main__":
