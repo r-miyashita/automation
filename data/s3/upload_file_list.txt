@@ -1,2 +1,0 @@
-test/dir1/polars.png
-test/dir1/tailwind.png

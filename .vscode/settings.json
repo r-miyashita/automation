@@ -5,5 +5,11 @@
     "python.analysis.autoIndent": true,
     "python.languageServer": "Pylance",
     "ruff.format.preview": false,
-    "window.zoomLevel": -1
+    "window.zoomLevel": -0.75,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": ["test", "--tb=short", "-ra"],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestLogLevel": "DEBUG",
+    "python.analysis.typeCheckingMode": "basic"
 }

@@ -1,10 +1,5 @@
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import pytest
 from unittest.mock import patch, mock_open
-import yaml
 from config import load_config  # config.pyのload_configをインポート
 
 
@@ -32,17 +27,13 @@ files:
     delete_results: "data/s3/delete_results.txt"
 """
 
-@pytest.fixture
-def mock_config_file():
-    with patch("builtins.open", mock_open(read_data=mock_yaml_content)):
-        yield
-
-def test_load_config(mock_config_file):
+def test_load_config_success():
     """
     load_config() が正しく動くことを確認
     """
     # 設定をロード
-    config = load_config()
+    with patch("builtins.open", mock_open(read_data=mock_yaml_content)):
+      config = load_config()
 
     # 環境設定が正しいことを確認
     assert config["environment"] == "dev"
@@ -68,7 +59,7 @@ environments:
       secret_access_key: "prod-secret-access-key"
 """
 
-def test_invalid_environment_config():
+def test_load_config_error():
     """
     環境設定が正しくない場合に ValueError を発生させる
     """

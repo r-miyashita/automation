@@ -9,7 +9,7 @@ environments:
       region: "region"
       bucket_name: "backet_name"
 
-    cloudfront:
+    cdn_origin:
       domain: "xxxx.net"
 
   production:
@@ -19,17 +19,16 @@ environments:
       region: "region"
       bucket_name: "bucket_name"
 
-    cloudfront:
+    cdn_origin:
       domain: "xxx.net"
+data:
+  resources:
+    files: "./data/s3/files"
 
-files:
-  inputs:
-    delete_url_list: "./data/s3/delete_url_list.txt"
-    upload_file_list: "./data/s3/upload_file_list.txt"
-    resource: "./data/s3/files"
+  params:
+    delete_url_list: "./data/s3/params/delete_url_list.txt"
+    upload_file_list: "./data/s3/params/upload_file_list.txt"
 
-  outputs:
+  logs:
     delete_results: "./data/s3/logs/delete_results.txt"
     upload_results: "./data/s3/logs/upload_results.txt"
-    error_logs: "./data/s3/logs/error.log"
-

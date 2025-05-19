@@ -1,101 +1,45 @@
 import os
-import logging
 import time
-import traceback
 from urllib import request
 
 import boto3
-from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 
 from config import (
     AWS_ACCESS_KEY_ID,
     AWS_REGION,
     AWS_SECRET_ACCESS_KEY,
-    DELETE_RESULT,
-    ERROR_LOG,
 )
 
 
-# ログ設定 （ デフォルトは error.log ）
-def setup_logger(log_file: str = ERROR_LOG):
-    # ログファイルの格納先が存在しない場合、作成する
-    log_dir = os.path.dirname(log_file)
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-    
-    logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
-
-    # ファイルハンドラー設定（ INFO 以上を書き出す ）
-    file_handler = logging.FileHandler(log_file, encoding="utf-8")
-    file_handler.setLevel(logging.INFO)
-    formatter = logging.Formatter("%(asctime)s [ %(levelname)s ] %(message)s")
-    file_handler.setFormatter(formatter)
-
-    # コンソールハンドラー設定（ WARNINF 以上を書き出す ）
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.WARNING)
-    console_handler.setFormatter(formatter)
-
-    # ロガーにハンドラーを追加
-    logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
-
-
-# ログ出力: 認証エラー
-def log_auth_error(auth_error):
-    logging.error(f"認証エラー: {str(auth_error)}")
-
-
-# ログ出力: クライアントエラー
-def log_client_error(client_error):
-    error_code = client_error.response.get("Error", {}).get("Code")
-    error_message = str(client_error)
-    if error_code == "403":
-        logging.error(
-            f"クライアントエラー（認証失敗またはアクセス権限不足）： {error_message}"
-        )
-    elif error_code == "404":
-        logging.error(f"クライアントエラー（バケットが不明）： {error_message}")
-    else:
-        logging.error(f"クライアントエラー（未定義のエラー）： {error_message}")
-
-
-# ログ出力： ファイルが見つからないエラー
-def log_file_error(file_error):
-    logging.error(f"指定されたファイルが見つかりません： {str(file_error)}")
-
-
-# ログ出力： 予期しないエラー
-def log_default_error(error, context=""):
-    error_type = type(error).__name__
-    error_message = str(error)
-    error_traceback = traceback.format_exc()
-    logging.error(
-        f"予期しないエラー： {context} - {error_type}: {error_message}: {error_traceback}"
-    )
-
-
-# s3への接続を行う
 def create_s3_client():
-    try:
-        s3_client = boto3.client(
-            "s3",
-            aws_access_key_id=AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-            region_name=AWS_REGION,
-        )
-        return s3_client
-    except (NoCredentialsError, PartialCredentialsError) as e:
-        log_auth_error(e)  # 認証情報が欠けていたらログに書き込み
-        return None
-    except Exception as e:
-        print(f"S3 へ接続中にエラーが発生しました: {e}")
-        raise
+    """AWS S3 クライアントを生成して返す。
+
+    環境変数や設定ファイルから取得した AWS 認証情報を使用して、
+    boto3 の S3 クライアントオブジェクトを作成する。
+
+    Returns:
+        boto3.client: 作成された S3 クライアントオブジェクト。
+    """
+    s3_client = boto3.client(
+        "s3",
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_REGION,
+    )
+    return s3_client
 
 
-# URLの疎通確認を行う
-def check_url_accessible(url, retries=2, delay=1.5):
+def is_url_accessible(url: str, retries: int = 2, delay: float = 1.5) -> bool:
+    """指定した URL にアクセス可能かを確認する。
+
+    Args:
+        url (str): アクセス対象の URL。
+        retries (int, optional): 試行回数。デフォルトは 2 回。
+        delay (float, optional): リトライ間の待機時間（秒）。デフォルトは 1.5 秒。
+
+    Returns:
+        bool: アクセスに成功した場合は True、失敗した場合は False。
+    """
     for attempt in range(retries):
         try:
             with request.urlopen(url) as response:
@@ -107,20 +51,55 @@ def check_url_accessible(url, retries=2, delay=1.5):
     return False
 
 
-# 処理結果ログを出力する
-def write_results_to_file(success_list, failure_list, output_file=DELETE_RESULT):
-    try:
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write("成功 ####\n")
-            for item in success_list:
-                f.write(f"{item}\n")
+def write_results_to_file(
+    success_list: list[dict], failure_list: list[dict], output_file: str
+) -> str:
+    """成功・失敗した処理結果をファイルに出力する。
 
-            f.write("\n")
+    Args:
+        success_list (list[str]): 処理に成功した項目のリスト。
+        failure_list (list[dict]): 処理に失敗した項目のリスト。
+            各辞書には 'file_name', 'reason', 'path' のキーを含む。
+        output_file (str): 出力先ファイルのパス。
 
-            f.write("失敗 ####\n")
-            for item in failure_list:
-                f.write(f"[{item['file_name']}] {item['reason']} : {item['url']}\n")
+    Returns:
+        str: 出力したログファイルの絶対パス。
+    """
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write("SUCCESS ++++++++++++++++++++++++\n")
+        for d in success_list:
+            line = "\t".join(str(v) for v in d.values())
+            f.write(f"{line}\n")
 
-        print(f"結果を{output_file}に出力しました")
-    except Exception as e:
-        print(f"結果ファイルの出力に失敗しました。: {e}")
+        f.write("\nFAILURE ------------------------\n")
+        for item in failure_list:
+            f.write(f"[{item['file_name']}] {item['reason']} : {item['path']}\n")
+
+    return os.path.abspath(output_file)
+
+
+def load_file(path: str) -> list[str]:
+    """指定したファイルを読み込み、空行を除いたリストを返す。
+
+    Args:
+        path (str): 入力ファイルのパス。
+
+    Returns:
+        list[str]: 空行を除いた各行（文字列）のリスト。
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        return [line.strip() for line in f if line.strip()]
+
+
+def notify_output(path: str) -> None:
+    """処理結果ファイルのパスをカラー表示で通知する。
+
+    Args:
+        path (str): 表示する出力ファイルのパス。
+    """
+    color = {
+        "main": "\033[33m",  # yellow
+        "reset": "\033[0m",
+    }
+
+    print(f"{color['main']}RESULT: {path}{color['reset']}\n")

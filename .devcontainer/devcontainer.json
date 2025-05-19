@@ -5,9 +5,22 @@
     "workspaceFolder": "/app",
     "customizations": {
         "vscode": {
-            "extensions": ["ms-python.python"],
+            "extensions": [
+                "ms-python.python",
+                "littlefoxteam.vscode-python-test-adapter", // ← Pytest Test Explorer
+                "hbenl.test-adapter-converter" // ← Test Explorer UI
+            ],
             "settings": {
                 "python.pythonPath": "/usr/local/bin/python",
+                "python.testing.pytestEnabled": true,
+                "python.testing.pytestArgs": ["test", "--tb=short", "-ra"],
+                "python.testing.unittestEnabled": false,
+                "python.testing.nosetestsEnabled": false,
+                "python.testing.pytestLogLevel": "DEBUG",
+
+                // Test Explorer UI の有効化
+                "testExplorer.pythonTestAdapter": true,
+
                 "workbench.colorCustomizations": {
                     "titleBar.activeBackground": "#19549C",
                     "titleBar.activeForeground": "#ffffff",

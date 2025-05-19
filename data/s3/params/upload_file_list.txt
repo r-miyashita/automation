@@ -1,0 +1,9 @@
+test/dir1/ext_test.jpg
+test/dir1/ext_test.pdf
+test/dir1/ext_test.png
+test/dir1/ext_test.ppt
+test/dir1/ext_test.txt
+test/dir1/ext_test.zip
+test/dir2/name_てすと_2.png
+test/フォルダ１/name_テスト_1.png
+test/フォルダ１/name_試験_3.png
