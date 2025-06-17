@@ -9,7 +9,7 @@ CONTEXT = f"{__name__}.py >>> 設定読込処理"
 CONFIG_FILE = "config.yml"
 
 
-def load_config():
+def load_config() -> dict:
     """
     YAML形式の設定ファイルを読み込み、指定された環境設定を検証して返します。
 
@@ -52,30 +52,30 @@ def report_config(file_name: str, messages: list[str]) -> None:
 
 # 設定をロード
 try:
-    CONFIG = load_config()
+    CONFIG: dict = load_config()
 
     # 現在の環境設定を取得
-    ENVIRONMENT = CONFIG["environment"]
-    ENV_CONFIG = CONFIG["environments"][ENVIRONMENT]
+    ENVIRONMENT: str = CONFIG["environment"]
+    ENV_CONFIG: dict = CONFIG["environments"][ENVIRONMENT]
 
     # AWSの設定
-    AWS_ACCESS_KEY_ID = ENV_CONFIG["aws"]["access_key_id"]
-    AWS_SECRET_ACCESS_KEY = ENV_CONFIG["aws"]["secret_access_key"]
-    AWS_REGION = ENV_CONFIG["aws"]["region"]
-    S3_BUCKET = ENV_CONFIG["aws"]["bucket_name"]
+    AWS_ACCESS_KEY_ID: str = ENV_CONFIG["aws"]["access_key_id"]
+    AWS_SECRET_ACCESS_KEY: str = ENV_CONFIG["aws"]["secret_access_key"]
+    AWS_REGION: str = ENV_CONFIG["aws"]["region"]
+    S3_BUCKET: str = ENV_CONFIG["aws"]["bucket_name"]
 
     # CDNオリジンのドメイン設定（例：CloudFrontのドメイン）
-    CDN_DOMAIN = ENV_CONFIG["cdn_origin"]["domain"]
+    CDN_DOMAIN: str = ENV_CONFIG["cdn_origin"]["domain"]
 
     # 共通のファイル設定
-    DELETE_URL_LIST = CONFIG["data"]["params"]["delete_url_list"]
-    DELETE_RESULT = CONFIG["data"]["logs"]["delete_results"]
-    UPLOAD_FILE_LIST = CONFIG["data"]["params"]["upload_file_list"]
-    RESOURCE = CONFIG["data"]["resources"]["files"]
-    UPLOAD_RESULT = CONFIG["data"]["logs"]["upload_results"]
+    DELETE_URL_LIST: str = CONFIG["data"]["params"]["delete_url_list"]
+    DELETE_RESULT: str = CONFIG["data"]["logs"]["delete_results"]
+    UPLOAD_FILE_LIST: str = CONFIG["data"]["params"]["upload_file_list"]
+    RESOURCE: str = CONFIG["data"]["resources"]["files"]
+    UPLOAD_RESULT: str = CONFIG["data"]["logs"]["upload_results"]
 
     # 設定内容の確認出力用
-    CONFIG_SUMMARY = [
+    CONFIG_SUMMARY: list[str] = [
         f"✅ Using `{ENVIRONMENT}` environment",
         f"✅ Bucket Name: {S3_BUCKET}",
     ]
