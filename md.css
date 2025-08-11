@@ -1,0 +1,118 @@
+/* 共通フォント設定 */
+html,
+body,
+.markdown-body {
+    background-color: #14264c !important;
+    font-family: "Yu-Gothic-UI";
+    color: #bbbbbb; /* やや落ち着いた明るい文字色 */
+    line-height: 1.6;
+    font-weight: 100;
+}
+
+a,
+.markdown-body a {
+    color: #00bfff;
+}
+body {
+    font-family: "Yu-Gothic-UI";
+    color: #bbbbbb; /* やや落ち着いた明るい文字色 */
+    line-height: 1.6;
+    font-weight: 100;
+}
+
+/* 見出し共通設定 */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    font-family: "Yu-Gothic-UI";
+    font-size: 1.125em;
+    color: #9fd1e7; /* 明るく柔らかいブルーグレー */
+}
+
+/* 見出しレベル別スタイル */
+.markdown-body h1 {
+    counter-reset: chapter;
+    font-size: 1.5em;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: #cdcdcd;
+    padding-bottom: 4px;
+}
+
+.markdown-body h2 {
+    border-style: solid;
+    border-width: 0 0 0.5px 0;
+    border-color: #cdcdcd;
+    padding-bottom: 4px;
+}
+
+/* コードブロック用フォント */
+[class*="language"] {
+    font-family: "MyricaM M";
+    background-color: #4e4e4e;
+    color: #e0e0e0;
+}
+
+/* チェックボックス付きリスト */
+.task-list-item-checkbox {
+    font-family: "Yu-Gothic-UI";
+    font-size: smaller;
+    accent-color: #81c8d5; /* 柔らかい水色 */
+}
+
+p {
+    margin: 0.5em;
+    padding: 0;
+    font-size: 0.75em;
+}
+
+/* 最上位（第一階層）のリスト項目だけに色をつける */
+ul > li,
+ol > li {
+    color: #af9441;
+    font-weight: bold;
+}
+
+/* ネストされたリスト項目は色を戻す */
+ul ul > li,
+ol ol > li,
+ul ol > li,
+ol ul > li,
+.child_list {
+    color: #bbbbbb; /* 通常テキスト色に戻す */
+    font-weight: 100;
+}
+
+/* コードブロック用スタイル（背景を薄い黄色に） */
+
+.markdown-body pre {
+    background-color: #1e2e4a;
+    display: block;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: Menlo, Consolas, monospace;
+    color: #5bbdb4;
+    font-size: 0.75em;
+}
+
+.text-pale {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+
+.text-nested {
+    display: block;
+    text-indent: 1em;
+    margin-bottom: 0.5em;
+}
+
+.ml-s {
+    margin-left: 1.5em;
+}
+
+.pl-s {
+    padding-left: 1.5em;
+}
