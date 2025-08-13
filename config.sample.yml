@@ -1,34 +1,34 @@
 # 設定ファイルに読み込ませる環境を指定
 environment: "development"
 
+# 環境ごとの設定を記述
 environments:
   development:
     aws:
-      access_key_id: "access_key_id"
-      secret_access_key: "secret_access_key"
-      region: "region"
-      bucket_name: "backet_name"
-
-    cdn_origin:
-      domain: "xxxx.net"
+      access_key_id: "YOUR_ACCESS_KEY"
+      secret_access_key: "YOUR_SECRET_KEY"
+      region: "your-region"
+      bucket_name: "your-dev-bucket"
+    # cdn_origin: developmentではCDNを使用しない
 
   production:
     aws:
-      access_key_id: "access_key_id"
-      secret_access_key: "secret_access_key"
-      region: "region"
-      bucket_name: "bucket_name"
-
+      access_key_id: "YOUR_ACCESS_KEY"
+      secret_access_key: "YOUR_SECRET_KEY"
+      region: "your-region"
+      bucket_name: "your-prod-bucket"
     cdn_origin:
-      domain: "xxx.net"
+      domain: "your-cloudfront-domain.net"
+
+# 入出力の設定を記述
 data:
   resources:
-    files: "./data/s3/files"
+    files: "./data/s3_operations/files"
 
   params:
-    delete_url_list: "./data/s3/params/delete_url_list.txt"
-    upload_file_list: "./data/s3/params/upload_file_list.txt"
+    delete_url_list: "./data/s3_operations/params/delete_url_list.txt"
+    upload_file_list: "./data/s3_operations/params/upload_file_list.txt"
 
   logs:
-    delete_results: "./data/s3/logs/delete_results.txt"
-    upload_results: "./data/s3/logs/upload_results.txt"
+    delete_results: "./data/s3_operations/logs/delete_results.txt"
+    upload_results: "./data/s3_operations/logs/upload_results.txt"

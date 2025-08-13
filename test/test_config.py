@@ -21,10 +21,10 @@ environments:
       secret_access_key: "prod-secret-access-key"
 files:
   inputs:
-    delete_url_list: "data/s3/delete_url_list.txt"
+    delete_url_list: "data/s3_operations/delete_url_list.txt"
   outputs:
-    error_logs: "data/s3/error.log"
-    delete_results: "data/s3/delete_results.txt"
+    error_logs: "data/s3_operations/error.log"
+    delete_results: "data/s3_operations/delete_results.txt"
 """
 
 def test_load_config_success():
@@ -39,7 +39,7 @@ def test_load_config_success():
     assert config["environment"] == "dev"
     assert config["environments"]["dev"]["aws"]["access_key_id"] == "fake-access-key-id"
     assert config["environments"]["dev"]["aws"]["secret_access_key"] == "fake-secret-access-key"
-    assert config["files"]["outputs"]["error_logs"] == "data/s3/error.log"
+    assert config["files"]["outputs"]["error_logs"] == "data/s3_operations/error.log"
 
 
 

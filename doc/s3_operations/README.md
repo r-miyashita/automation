@@ -32,7 +32,7 @@ AWSコンソールを開かずに、VSCodeなどのローカル環境から一�
 <br>
 
 > [!NOTE]
-> - アップロード・削除時の結果は `./data/s3/logs/` に保存されます
+> - アップロード・削除時の結果は `./data/s3_operations/logs/` に保存されます
 > - URLの変換・疎通チェックは `config.yml` の `environment` によって挙動が変わります  
 > - 日本語や特殊文字を含むファイル名も適切にURLエンコードして処理されます
 
@@ -102,14 +102,14 @@ environments:
     aws:
       access_key_id: "YOUR_ACCESS_KEY"
       secret_access_key: "YOUR_SECRET_KEY"
-      region: "ap-northeast-1"
+      region: "your-region"
       bucket_name: "your-dev-bucket"
 
   production:
     aws:
       access_key_id: "YOUR_ACCESS_KEY"
       secret_access_key: "YOUR_SECRET_KEY"
-      region: "ap-northeast-1"
+      region: "your-region"
       bucket_name: "your-prod-bucket"
 
     cdn_origin:
@@ -127,8 +127,8 @@ environments:
 
 #### 準備
 
-- アップロードしたいファイルを `./data/s3/files` に配置  
-- アップロードパスを `upload_file_list.txt` に記入し、`./data/s3/params` に置く
+- アップロードしたいファイルを `./data/s3_operations/files` に配置  
+- アップロードパスを `upload_file_list.txt` に記入し、`./data/s3_operations/params` に置く
 
 ```text
 # upload_file_list.txt の例（バケット名は含めず、S3内のパスを記述）
@@ -161,7 +161,7 @@ test/フォルダ１/name_試験_3.png
 
 #### 準備
 
-- 削除対象のURLを `delete_url_list.txt` に記入し、`./data/s3/params` に配置します。
+- 削除対象のURLを `delete_url_list.txt` に記入し、`./data/s3_operations/params` に配置します。
 
 ```text
 # delete_url_list.txt の例

@@ -1,0 +1,9 @@
+https://dbvcrd3zeyx4h.cloudfront.net/test/dir1/ext_test.jpg
+https://dbvcrd3zeyx4h.cloudfront.net/test/dir1/ext_test.pdf
+https://dbvcrd3zeyx4h.cloudfront.net/test/dir1/ext_test.png
+https://dbvcrd3zeyx4h.cloudfront.net/test/dir1/ext_test.ppt
+https://dbvcrd3zeyx4h.cloudfront.net/test/dir1/ext_test.txt
+https://dbvcrd3zeyx4h.cloudfront.net/test/dir1/ext_test.zip
+https://dbvcrd3zeyx4h.cloudfront.net/test/dir2/name_%E3%81%A6%E3%81%99%E3%81%A8_2.png
+https://dbvcrd3zeyx4h.cloudfront.net/test/%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%EF%BC%91/name_%E3%83%86%E3%82%B9%E3%83%88_1.png
+https://dbvcrd3zeyx4h.cloudfront.net/test/%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%EF%BC%91/name_%E8%A9%A6%E9%A8%93_3.png
