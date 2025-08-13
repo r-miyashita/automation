@@ -1,42 +1,28 @@
-<link rel="stylesheet" href="./md.css">
-
 # Automation
 
-pythonを使ってタスクの自動化を行います。<br>
-<br>
+Python を使ったタスク自動化ツールです。
 
 
-
-<br>
+---
 
 ## 機能
 
--  <span style="display:block;margin-bottom:.375em"><a href="./doc/s3_operations/s3_operations.md" style="color:#af9441;">S3 Operations</a></span>
-    - <span style="color:rgba(0, 213, 255, 0.5);font-size:.875em;font-weight:bold;">UPLOAD</a></span>
-        <br>
-        <span class="text-pale text-nested">
-        リソースを指定のパスへ一括アップロードします
-        </span>
-    - <span style="color:rgba(0, 213, 255, 0.5);font-size:.875em;font-weight:bold;">DELETE</span>
-        <br>
-        <span style="opacity:.75;font-size:.75em;display:block;text-indent:1em;">
-        URL指定でリソースを一括削除します
-        </span>
+### [S3 Operations](./doc/s3_operations/README.md)
+- **UPLOAD**  
+  リソースを指定のパスへ一括アップロードします。
+- **DELETE**  
+  URL を指定してリソースを一括削除します。
+
+### MySQL Operations
+- 🚀🚀 **準備中...**
 
 <br>
 
-- <span style="display:block;margin-bottom:.375em">MySQL Operations</span>
-    - 🚀🚀 <span style="font-weight:bold;color:rgba(0, 213, 255, 0.5);font-size:.875em;">Getting ready...</span>
+---
 
+## 環境構成
 
-<br><br>
-
-## 環境
-
-<br>
-<div style="font-size:smaller;">
-
-````
+```
 .
 |
 ├── requirements.txt 
@@ -53,7 +39,7 @@ pythonを使ってタスクの自動化を行います。<br>
 │
 |
 ├── data/                                                  << Input/Output
-│   └── s3/
+│   └── s3_operations/
 │       ├── files/
 │       │   └── resouce_file
 │       ├── logs/
@@ -70,30 +56,26 @@ pythonを使ってタスクの自動化を行います。<br>
     ├── upload.py       << Exec Script
     └── utils.py
 
+```
 
-````
+<br>
 
-</div>
+---
+
+## セットアップ手順 
+
+1. リポジトリをローカル環境へコピーし、VS Code を開きます。
+
+    ```bash
+    git clone https://github.com/r-miyashita/automation.git && cd automation && rm -rf .git && code .
+    ```
+
+<br>
+
+2. `Ctrl + Shift + P` を押してコマンドパレットを開き、  
+   「Dev Containers: Reopen in Container（開発コンテナー：コンテナーで再度開く）」を選択します。
+
+![VS CodeでDev Containersを開く](./doc/s3_operations/assets/vscode_gui.png)
 
 <br><br>
 
-## Getting Start ⚡
-<br>
-
-リポジトリをローカル環境へコピーし、VS Codeを開く
-<br>
-
-```
-git clone https://github.com/r-miyashita/automation.git && cd automation && rm -rf .git && code .
-```
-
-<br>
-
-ctr + shift + p を押して、「Dev containers: Reopen in Container（開発コンテナー：コンテナーで再度開く」を選択する
-
-![alt text](./doc/s3_operations/vscode_gui.png)
-
-<br>
-
-
-<br><br><br><br>
