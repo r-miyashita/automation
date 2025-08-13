@@ -97,6 +97,7 @@ AWSコンソールを開かずに、VSCodeなどのローカル環境から一�
 ```yaml
 environment: "development"
 
+
 environments:
   development:
     aws:
@@ -104,6 +105,8 @@ environments:
       secret_access_key: "YOUR_SECRET_KEY"
       region: "your-region"
       bucket_name: "your-dev-bucket"
+    cdn_origin:
+      domain: ""
 
   production:
     aws:
@@ -111,9 +114,9 @@ environments:
       secret_access_key: "YOUR_SECRET_KEY"
       region: "your-region"
       bucket_name: "your-prod-bucket"
-
     cdn_origin:
       domain: "your-cloudfront-domain.net"
+
 ```
 
 <br>
