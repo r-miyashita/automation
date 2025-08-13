@@ -9,7 +9,9 @@ environments:
       secret_access_key: "YOUR_SECRET_KEY"
       region: "your-region"
       bucket_name: "your-dev-bucket"
-    # cdn_origin: developmentではCDNを使用しない
+    # developmentではCDNを使用しないので、空にしておく。
+    cdn_origin:
+      domain: ""
 
   production:
     aws:
