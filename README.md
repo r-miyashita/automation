@@ -30,7 +30,6 @@ Python を使ったタスク自動化ツールです。
 |
 ├── .devcontainer/
 |    ├── devcontainer.json
-|    ├── docker-compose.yml
 |    └── Dockerfile
 |
 |

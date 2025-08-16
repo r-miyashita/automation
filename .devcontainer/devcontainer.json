@@ -1,7 +1,9 @@
 {
     "name": "python",
-    "dockerComposeFile": "./docker-compose.yml",
-    "service": "app",
+    "build": {
+        "dockerfile": "./Dockerfile", // composeを使わず直接Dockerfileを指定
+        "context": ".."
+    },
     "workspaceFolder": "/app",
     "customizations": {
         "vscode": {
@@ -29,5 +31,6 @@
                 }
             }
         }
-    }
+    },
+    "mounts": ["source=${localWorkspaceFolder},target=/app,type=bind"]
 }

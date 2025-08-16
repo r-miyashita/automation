@@ -11,4 +11,8 @@ COPY requirements.txt /app/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 環境変数をcomposeから移植
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app
+
 CMD ["bash"]
